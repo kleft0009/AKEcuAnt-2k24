@@ -14,7 +14,7 @@ import java.util.function.Function;
 
 public abstract class AKDataHelperSQLite {
 
-    private static String DBPathConnection = "jdbc:sqlite:AKdatabase//AKHormiguero.sqlite";
+    private static String DBPathConnection = "jdbc:sqlite:AKdatabase//AKHormigueroVirtual.sqlite";
 
     protected AKDataHelperSQLite() {
     }
@@ -50,7 +50,8 @@ public abstract class AKDataHelperSQLite {
                 list.add(mapper.apply(rs));
             }
         } catch (SQLException e) {
-            throw new AKAppException(e, getClass().getName(), "executeReadByPadre()");
+            //throw new AKAppException(e, getClass().getName(), "executeReadByPadre()");
+            System.out.println(e);
         }
         return list;
     }
@@ -78,7 +79,7 @@ public abstract class AKDataHelperSQLite {
         }
     }
 
-    protected String getDateTimeNow() {
+    public static String getDateTimeNow() {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         return dtf.format(LocalDateTime.now());
     }

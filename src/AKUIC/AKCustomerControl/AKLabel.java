@@ -1,24 +1,27 @@
-package UIC.CustomerControl;
+package AKUIC.AKCustomerControl;
 
+import AKUIC.AKStyle;
 import java.awt.Color;
 import java.awt.Font;
-
 import javax.swing.JLabel;
 
-import UIC.RAStyle;
+public class AKLabel extends JLabel {
 
-public class RALabel extends JLabel{
-    public RALabel(){
+    //Label para guardar etiquetas de texto
+    public AKLabel() {
         customizeComponent();
     }
-    public RALabel(String text){
+
+    public AKLabel(String text) {
         setText(text);
         customizeComponent();
     }
-    private void customizeComponent(){
-        setCustomizeComponent(getText(), RAStyle.RAFONT, RAStyle.RACOLOR_FONT_LIGHT, RAStyle.RAALIGNMENT_LEFT);
+
+    private void customizeComponent() {
+        setCustomizeComponent(getText(), AKStyle.RAFONT, AKStyle.RACOLOR_FONT_LIGHT, AKStyle.RAALIGNMENT_LEFT);
     }
-    public void setCustomizeComponent(String text, Font  font, Color color, int alignment) {
+
+    public void setCustomizeComponent(String text, Font font, Color color, int alignment) {
         setText(text);
         setFont(font);
         setOpaque(false);

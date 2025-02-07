@@ -1,6 +1,5 @@
 package AKBLC;
 
-import java.util.ArrayList;
 import AKBLC.AKEntities.AKCarnivoro;
 import AKBLC.AKEntities.AKGenoAlimento;
 import AKBLC.AKEntities.AKHLarva;
@@ -9,6 +8,7 @@ import AKBLC.AKEntities.AKIngestaNativa;
 import AKBLC.AKEntities.AKXY;
 import AKDAC.AKHormigueroDAC;
 import AKInfra.AKAppException;
+import java.util.ArrayList;
 
 public class AKHormiguero {
 
@@ -46,7 +46,7 @@ public class AKHormiguero {
 
         // Creando GenoAlimento
         if ("XY".equals(alimentoGeno)) {
-            aGeno = new AKXY();
+            aGeno = new AKXY(alimentoNativo, alimentoNativo);
         } else {
             aGeno = new AKXY(alimentoNativo, alimentoNativo);
         }
@@ -77,7 +77,7 @@ public class AKHormiguero {
         }
 
         // Alimentar a la hormiga
-        hormiga.comer(aNativo);
+        hormiga.AKComer(aNativo);
 
         return hormiga.getTipo() + " alimentada con éxito";
     }

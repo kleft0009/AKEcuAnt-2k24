@@ -2,10 +2,6 @@ package AKBLC.AKEntities;
 
 public class AKXY extends AKGenoAlimento {
 
-    public AKXY() {
-        super("DefaultTipo", "DefaultGen");
-    }
-
     public AKXY(String tipo, String característicasGenéticas) {
         super(tipo, característicasGenéticas);
     }

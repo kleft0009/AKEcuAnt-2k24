@@ -1,13 +1,12 @@
 package AKDAC.AKDAO;
 
+import AKDAC.AKDTO.AKCatalogoDTO;
+import AKDAC.AKDataHelperSQLite;
+import AKDAC.AKIDAO;
+import AKInfra.AKAppException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
-
-import AKDAC.AKDataHelperSQLite;
-import AKDAC.AKIDAO;
-import AKDAC.AKDTO.AKCatalogoDTO;
-import AKInfra.AKAppException;
 
 public class AKCatalogoDAO extends AKDataHelperSQLite implements AKIDAO<AKCatalogoDTO> {
 
@@ -19,7 +18,7 @@ public class AKCatalogoDAO extends AKDataHelperSQLite implements AKIDAO<AKCatalo
             + "Estado, "
             + "FechaCrea, "
             + "FechaModifica "
-            + " FROM Catalogo WHERE Estado = 'A";
+            + " FROM AKCatalogo WHERE Estado = 'A";
 
     @Override
     public AKCatalogoDTO newDTO(ResultSet rs) {
@@ -85,7 +84,7 @@ public class AKCatalogoDAO extends AKDataHelperSQLite implements AKIDAO<AKCatalo
 
     @Override
     public boolean update(AKCatalogoDTO dto) throws Exception {
-        String query = "UPDATE Catalogo SET "
+        String query = "UPDATE AKCatalogo SET "
                 + "IdCatalogoPadre = ?, "
                 + "Nombre = ?, "
                 + "Detalle = ?, "
@@ -100,7 +99,7 @@ public class AKCatalogoDAO extends AKDataHelperSQLite implements AKIDAO<AKCatalo
 
     @Override
     public boolean delete(Integer id) throws Exception {
-        String query = "UPDATE Catalogo SET Estado = ?, FechaModifica = ? WHERE IdCatalogo = ?";
+        String query = "UPDATE AKCatalogo SET Estado = ?, FechaModifica = ? WHERE IdCatalogo = ?";
         return execute(query, "X", getDateTimeNow(), id);
     }
 

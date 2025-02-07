@@ -138,4 +138,9 @@ public class AKHormigaDTO {
 
     }
 
+    public Object getSexo() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getSexo'");
+    }
+
 }

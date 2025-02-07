@@ -9,23 +9,32 @@ public class AKCatalogo {
 
     protected AKCatalogoDAO oCatalogoDAO = new AKCatalogoDAO();
 
-    public Map<Integer, String> getAllHormigaTipo() throws Exception {
-        return getMap(1);
+    public Map<Integer, String> AKGetAllHormigaTipo() throws Exception {
+        return AKGetMap(1);
     }
 
-    public Map<Integer, String> getAllHormigaTipoSexo() throws Exception {
-        return getMap(2);
+    public Map<Integer, String> AKGetAllHormigaTipoSexo() throws Exception {
+        return AKGetMap(2);
     }
 
-    public Map<Integer, String> getAllHormigaTipoEstado() throws Exception {
-        return getMap(3);
+    public Map<Integer, String> AKGetAllHormigaTipoEstado() throws Exception {
+        return AKGetMap(3);
     }
 
-    private Map<Integer, String> getMap(Integer IdCatalogoPadre) throws Exception {
+    public Map<Integer, String> AKGetAllHormigaTipoGeno() throws Exception {
+        return AKGetMap(4);
+    }
+
+    public Map<Integer, String> AKGetAllHormigaTipoIngesta() throws Exception {
+        return AKGetMap(5);
+    }
+
+    private Map<Integer, String> AKGetMap(Integer IdCatalogoPadre) throws Exception {
         Map<Integer, String> map = new HashMap<>();
         for (AKCatalogoDTO pt : oCatalogoDAO.readByPadre(IdCatalogoPadre)) {
-            map.put(pt.getIdCatalogoPadre(), pt.getNombre());  // Cambiar IdCatalogo por IdCatalogoPadre
+            map.put(pt.getIdCatalogo(), pt.getNombre());
         }
         return map;
     }
+
 }

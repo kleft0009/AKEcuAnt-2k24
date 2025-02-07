@@ -9,7 +9,7 @@ DROP TABLE IF EXISTS Hormiga;
 DROP TABLE IF EXISTS Catalogo;
 
 CREATE TABLE
-    Catalogo (
+    AKCatalogo (
         IdCatalogo INTEGER PRIMARY KEY AUTOINCREMENT,
         IdCatalogoPadre INTEGER,
         Nombre VARCHAR(20) NOT NULL,
@@ -20,7 +20,7 @@ CREATE TABLE
     );
 
 CREATE TABLE
-    Hormiga (
+    AKHormiga (
         IdHormiga INTEGER PRIMARY KEY AUTOINCREMENT,
         IdCatalogoTipo INTEGER NOT NULL REFERENCES Catalogo (IdCatalogo),
         IdCatalogoSexo INTEGER NOT NULL REFERENCES Catalogo (IdCatalogo),
@@ -34,8 +34,6 @@ CREATE TABLE
     );
 
 DROP VIEW IF EXISTS vwHormiga;
-
-DROP VIEW IF EXISTS vwHormigaTipo;
 
 CREATE VIEW
     vwHormiga AS
@@ -57,6 +55,32 @@ WHERE
         'HormigaGenoAlimento',
         'HormigaIngestaNativa'
     );
+
+DROP VIEW IF EXISTS vwHormigaDetalles;
+
+CREATE VIEW
+    vwHormigaDetalles AS
+SELECT
+    h.IdHormiga AS IdHormiga,
+    ct.IdCatalogo AS IdCatalogoTipo,
+    cs.IdCatalogo AS IdCatalogoSexo,
+    ce.IdCatalogo AS IdCatalogoEstado,
+    ci.IdCatalogo AS IdCatalogoIngestaNativa,
+    cg.IdCatalogo AS IdCatalogoGenoAllimento,
+    ct.Nombre AS Tipo,
+    cs.Nombre AS Sexo,
+    ce.Nombre AS Estado,
+    ci.Nombre AS IngestaNativa,
+    cg.Nombre AS GenoAlimento,
+    h.Nombre,
+    h.FechaCreacion
+FROM
+    Hormiga h
+    JOIN Catalogo ct ON h.IdCatalogoTipo = ct.IdCatalogo
+    JOIN Catalogo cs ON h.IdCatalogoSexo = cs.IdCatalogo
+    JOIN Catalogo ce ON h.IdCatalogoEstado = ce.IdCatalogo
+    JOIN Catalogo ci ON h.IdCatalogoIngestaNativa = ci.IdCatalogo
+    JOIN Catalogo cg ON h.IdCatalogoGenoAllimento = cg.IdCatalogo;
 
 INSERT INTO
     Catalogo (IdCatalogoPadre, Nombre, Detalle)

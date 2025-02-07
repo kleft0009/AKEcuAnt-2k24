@@ -4,8 +4,11 @@ import AKDAC.AKDTO.AKHormigaDTO;
 import AKDAC.AKDataHelperSQLite;
 import AKDAC.AKIDAO;
 import AKInfra.AKAppException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class AKHormigaDAO extends AKDataHelperSQLite implements AKIDAO<AKHormigaDTO> {
@@ -22,6 +25,36 @@ public class AKHormigaDAO extends AKDataHelperSQLite implements AKIDAO<AKHormiga
             + "FechaCrea, "
             + "FechaModifica "
             + " FROM Hormiga WHERE Estado = 'A'";
+
+    public List<AKHormigaDTO> readHormigasFromView() throws AKAppException {
+        String query = "SELECT * FROM vwHormigaDetalles";  // Consulta a la vista
+
+        List<AKHormigaDTO> hormigas = new ArrayList<>();
+
+        try (Connection conn = openConnection(); // Obtén conexión a la base de datos
+                 PreparedStatement stmt = conn.prepareStatement(query); ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                // Crear un DTO y mapear los resultados
+                AKHormigaDTO dto = new AKHormigaDTO();
+                dto.setIdHormiga(rs.getInt("IdHormiga"));
+                dto.setIdCatalogoTipo(rs.getInt("IdCatalogoTipo"));
+                dto.setIdCatalogoSexo(rs.getInt("IdCatalogoSexo"));
+                dto.setIdCatalogoEstado(rs.getInt("IdCatalogoEstado"));
+                dto.setIdCatalogoIngestaNativa(rs.getInt("IdCatalogoIngestaNativa"));
+                dto.setIdCatalogoGenoAllimento(rs.getInt("IdCatalogoGenoAllimento"));
+                dto.setNombre(rs.getString("Nombre"));
+                dto.setEstado(rs.getString("Estado"));
+                dto.setFechaCrea(rs.getString("FechaCreacion"));
+
+                hormigas.add(dto);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+
+        return hormigas;
+    }
 
     @Override
     public AKHormigaDTO newDTO(ResultSet rs) {
