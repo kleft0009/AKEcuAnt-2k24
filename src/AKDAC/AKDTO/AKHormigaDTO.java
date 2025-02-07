@@ -130,17 +130,11 @@ public class AKHormigaDTO {
                 + "\n IdCatalogoSexo            : " + getIdCatalogoSexo()
                 + "\n IdCatalogoEstado          : " + getIdCatalogoEstado()
                 + "\n IdCatalogoIngestaNativa   : " + getIdCatalogoIngestaNativa()
-                + "\n IdCatalogoGenoAllimento    : " + getIdCatalogoGenoAllimento()
+                + "\n IdCatalogoGenoAllimento   : " + getIdCatalogoGenoAllimento()
                 + "\n Nombre                    : " + getNombre()
                 + "\n Estado                    : " + getEstado()
                 + "\n FechaCrea                 : " + getFechaCrea()
                 + "\n FechaModifica             : " + getFechaModifica();
 
     }
-
-    public Object getSexo() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getSexo'");
-    }
-
 }
