@@ -1,82 +1,84 @@
 package AKBLC;
 
-import java.util.ArrayList; 
-import AKBLC.AKEntities.AKCarnivoro;    
-import AKBLC.AKEntities.AKGenoAlimento;        
-import AKBLC.AKEntities.AKHLarva; 
-import AKBLC.AKEntities.AKHormiga; 
-import AKBLC.AKEntities.IAKIngestaNativa; 
-import AKBLC.AKEntities.AKXY; 
-import AKDAC.AKHormigueroDAC; 
+import java.util.ArrayList;
+import AKBLC.AKEntities.AKCarnivoro;
+import AKBLC.AKEntities.AKGenoAlimento;
+import AKBLC.AKEntities.AKHLarva;
+import AKBLC.AKEntities.AKHormiga;
+import AKBLC.AKEntities.AKIngestaNativa;
+import AKBLC.AKEntities.AKXY;
+import AKDAC.AKHormigueroDAC;
 import AKInfra.AKAppException;
+
 public class AKHormiguero {
 
     public ArrayList<AKHormiga> lstHormiguero = new ArrayList<>();
 
-    public String crearLarva() throws AKAppException {
+    public String AKcrearLarva() throws AKAppException {
         AKHormiga hormiga = new AKHLarva(lstHormiguero.size() + 1);
         lstHormiguero.add(hormiga);
         return "HORMIGA LARVA, agregada al hormiguero";
     }
 
-    public String eliminarHormiga(int idHormiga) throws Exception {
-        String msg = "HORMIGA, no encontrada";
-        for (int i = 0; i < lstHormiguero.size(); i++) {
-            if (lstHormiguero.get(i).getId() == idHormiga) {
-                msg = lstHormiguero.get(i).getTipo() + ", eliminada del hormiguero";
-                lstHormiguero.remove(i);
-                break;
+    public String AKeliminarHormiga(int idHormiga) throws Exception {
+        for (AKHormiga hormiga : lstHormiguero) {
+            if (hormiga.getId() == idHormiga) {
+                hormiga.setEstado("MUERTA");
+                return hormiga.getTipo() + " marcada como MUERTA";
             }
         }
-        return msg;
+        return "HORMIGA no encontrada";
     }
 
-    public String guardarHormiguero() throws AKAppException {
-        String fullDataHormiga = "";
-        for (AKHormiga hormiga : lstHormiguero)
-            fullDataHormiga += hormiga.toString();
-        new AKHormigueroDAC().saveHormigueroToCSV(fullDataHormiga);
-        return "HORMIGUERO, almacenado";
+    public String AKeguardarHormiguero() throws AKAppException {
+        StringBuilder fullDataHormiga = new StringBuilder();
+        for (AKHormiga hormiga : lstHormiguero) {
+            fullDataHormiga.append(hormiga.toString()).append("\n");
+        }
+        new AKHormigueroDAC().saveHormigueroToCSV(fullDataHormiga.toString());  // Se pasa la data correctamente
+        return "HORMIGUERO almacenado";
     }
 
-    public String alimentarHormiga(int IdHormiga, String alimentoGeno, String alimentoNativo) throws AKAppException {
-        int indexlist = 0;
-        AKGenoAlimento aGeno = null;
-        IAKIngestaNativa aNativo = null;
+    public String AKalimentarHormiga(int idHormiga, String alimentoGeno, String alimentoNativo) throws AKAppException {
+        AKGenoAlimento aGeno;
+        AKIngestaNativa aNativo;
         AKHormiga hormiga = null;
 
         // Creando GenoAlimento
-        switch (alimentoGeno) {
-            case "XX": aGeno = new AKXY(); break;
-            case "XY": aGeno = new AKXY(); break;
-            default: aGeno = new AKGenoAlimento(); break;
+        if ("XY".equals(alimentoGeno)) {
+            aGeno = new AKXY();
+        } else {
+            aGeno = new AKXY(alimentoNativo, alimentoNativo);
         }
 
         // Creando IngestaNativa
-        switch (alimentoNativo) {
-            case "Carnívoro": aNativo = new AKCarnivoro(); break;
-            case "Herbívoro": aNativo = new IAKIngestaNativa(); break;
-            case "Omnívoro": aNativo = new IAKIngestaNativa(); break;
-            case "Insectívoro": aNativo = new IAKIngestaNativa(); break;
-            case "Nectarívoros": aNativo = new IAKIngestaNativa(); break;
+        if ("Carnívoro".equals(alimentoNativo)) {
+            aNativo = new AKCarnivoro();
+        } else {
+            return "Ups...! Alimento nativo no válido";
         }
-        //buscar indexList y hormiga a alimentar 
-        for (;indexList < lstHormiguero.size(); indexList++) 
-            if (lstHormiguero.get(indexList).getId() == Idhormiga) { 
-                hormiga = lstHormiguero.get(indexList); 
-                break; 
-            } 
 
-        //validamos 
-        if (aNativo == null || aGeno == null || hormiga == null || hormiga.getEstado() == "MUERTA") 
-            return "Ups...! alimento u hormiga no son válidos"; 
-            
-        //inyectamos el genoAlimento a la ingestaNativa y se procede a alimenta a la hormiga 
-        if( aNativo.inyectar(aGeno)) 
-            lstHormiguero.set(indexList, hormiga.comer(aNativo)); 
-        else 
-            return hormiga.getTipo() + " NO alimentada"; 
-            
-        return lstHormiguero.get(indexList).getTipo() + " Alimentada"; 
-    } 
+        // Buscar la hormiga en la lista
+        for (AKHormiga h : lstHormiguero) {
+            if (h.getId() == idHormiga) {
+                hormiga = h;
+                break;
+            }
+        }
+
+        // Validaciones
+        if (hormiga == null || "MUERTA".equals(hormiga.getEstado())) {
+            return "Ups...! La hormiga no es válida o está muerta";
+        }
+
+        // Inyectar alimento genético a la ingesta nativa
+        if (!aNativo.AKInyectar(aGeno)) {
+            return "Error al inyectar el alimento genético en la hormiga";
+        }
+
+        // Alimentar a la hormiga
+        hormiga.comer(aNativo);
+
+        return hormiga.getTipo() + " alimentada con éxito";
+    }
 }

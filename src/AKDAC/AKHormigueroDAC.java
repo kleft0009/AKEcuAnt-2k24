@@ -8,7 +8,7 @@ import java.io.PrintWriter;
 
 public class AKHormigueroDAC {
 
-    public void saveHorigueroToCSV(String fullDataHormiga) throws AKAppException {
+    public void saveHormigueroToCSV(String fullDataHormiga) throws AKAppException {
         try (PrintWriter writer = new PrintWriter(new FileWriter(AKConfig.DATAFILE))) {
             writer.println("id,tipo,sexo,estado,aComido");
             writer.println(fullDataHormiga);
