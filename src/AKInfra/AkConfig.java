@@ -7,8 +7,8 @@ import javax.swing.JOptionPane;
 public abstract class AKConfig {
 
     public static final URL URL_LOGO = Config.class.getResource("/GUI/Resource/Logo.png");
-    public static final String DATAFILE = "Data\\hormiguero.csv";
-    public static final String LOGFILE = "Data\\log.txt";
+    public static final String DATAFILE = "data\\Hormiguero.csv";
+    public static final String LOGFILE = "data\\log.txt";
 
     public static final void showMsg(String msg) {
         JOptionPane.showMessageDialog(null, msg, "🐜 EcuAnt", JOptionPane.INFORMATION_MESSAGE);

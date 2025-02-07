@@ -4,19 +4,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class AKCatalogo {
-        protected CatalogoDAO oCatalogoDAO = new CatalogoDAO();
 
+    protected AKCatalogoDAO oCatalogoDAO = new AKCatalogoDAO();
 
-    public Map<Integer, String> getAllHormigaTipo() throws Exception{
+    public Map<Integer, String> getAllHormigaTipo() throws Exception {
         return getMap(1);
     }
 
-    
-    public Map<Integer, String> getAllHormigaTipoSexo() throws Exception{
+    public Map<Integer, String> getAllHormigaTipoSexo() throws Exception {
         return getMap(2);
     }
-    
-    public Map<Integer, String> getAllHormigaTipoEstado() throws Exception{
+
+    public Map<Integer, String> getAllHormigaTipoEstado() throws Exception {
         return getMap(3);
     }
 
