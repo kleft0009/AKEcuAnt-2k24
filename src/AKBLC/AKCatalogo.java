@@ -22,7 +22,7 @@ public class AKCatalogo {
 
     private Map<Integer, String> getMap(Integer IdCatalogoPadre) throws Exception {
         Map<Integer, String> map = new HashMap<>();
-        for (CatalogoDTO pt : oCatalogoDAO.readByPadre(IdCatalogoPadre)) {
+        for (AKCatalogoDTO pt : oCatalogoDAO.readByPadre(IdCatalogoPadre)) {
             map.put(pt.getIdCatalogoPadre(), pt.getNombre());  // Cambiar IdCatalogo por IdCatalogoPadre
         }
         return map;

@@ -39,7 +39,8 @@ public class AKHormiguero {
         return "HORMIGUERO, almacenado";
     }
 
-    public String alimentarHormiga(int idHormiga, String alimentoGeno, String alimentoNativo) throws AKAppException {
+    public String alimentarHormiga(int IdHormiga, String alimentoGeno, String alimentoNativo) throws AKAppException {
+        int indexlist = 0;
         AKGenoAlimento aGeno = null;
         AKIngestaNativa aNativo = null;
         AKHormiga hormiga = null;

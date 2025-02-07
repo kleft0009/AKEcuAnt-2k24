@@ -1,25 +1,27 @@
-package DAC.DTO;
+package AKDAC.AKDTO;
 
-public class HormigaDTO {
+public class AKHormigaDTO {
 
     private Integer IdHormiga;
     private Integer IdCatalogoTipo;
     private Integer IdCatalogoSexo;
     private Integer IdCatalogoEstado;
+    private Integer IdCatalogoIngestaNativa;
+    private Integer IdCatalogoGenoAllimento;
     private String Nombre;
     private String Estado;
     private String FechaCrea;
     private String FechaModifica;
     
-    public HormigaDTO() {}
+    public AKHormigaDTO() {}
 
-    public HormigaDTO(Integer idCatalogoTipo, Integer idCatalogoSexo, Integer idCatalogoEstado, String nombre) {
+    public AKHormigaDTO(Integer idCatalogoTipo, Integer idCatalogoSexo, Integer idCatalogoEstado, String nombre) {
         IdCatalogoTipo = idCatalogoTipo;
         IdCatalogoSexo = idCatalogoSexo;
         IdCatalogoEstado = idCatalogoEstado;
         Nombre = nombre;
     }
-    public HormigaDTO(Integer idHormiga, Integer idCatalogoTipo, Integer idCatalogoSexo, Integer idCatalogoEstado,
+    public AKHormigaDTO(Integer idHormiga, Integer idCatalogoTipo, Integer idCatalogoSexo, Integer idCatalogoEstado,
             String nombre, String estado, String fechaCrea, String fechaModifica) {
         IdHormiga = idHormiga;
         IdCatalogoTipo = idCatalogoTipo;
@@ -79,6 +81,22 @@ public class HormigaDTO {
         FechaModifica = fechaModifica;
     }
 
+    public Integer getIdCatalogoIngestaNativa() {
+        return IdCatalogoIngestaNativa;
+    }
+
+    public void setIdCatalogoIngestaNativa(Integer IdCatalogoIngestaNativa) {
+        this.IdCatalogoIngestaNativa = IdCatalogoIngestaNativa;
+    }
+
+    public Integer getIdCatalogoGenoAllimento() {
+        return IdCatalogoGenoAllimento;
+    }
+
+    public void setIdCatalogoGenoAllimento(Integer IdCatalogoGenoAllimento) {
+        this.IdCatalogoGenoAllimento = IdCatalogoGenoAllimento;
+    }
+
     @Override
     public String toString(){
         return getClass().getName()
@@ -86,6 +104,8 @@ public class HormigaDTO {
         + "\n IdCatalogoTipo : " + getIdCatalogoTipo()
         + "\n IdCatalogoSexo : " + getIdCatalogoSexo()
         + "\n IdCatalogoEstado : " + getIdCatalogoEstado()
+        + "\n IdCatalogoIngestaNativa : " + getIdCatalogoIngestaNativa()
+        + "\n IdCatalogoGenoAllimento : " + getIdCatalogoGenoAllimento()
         + "\n Nombre : " + getNombre()
         + "\n Estado : " + getEstado()
         + "\n FechaCrea : " + getFechaCrea()
@@ -93,4 +113,5 @@ public class HormigaDTO {
         
 
     }
+
 }

@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.function.Supplier;
 
 public class AKBLFactory<T> {
-        private final IDAO<T> oDAO;
+        private final AKIDAO<T> oDAO;
 
     public BLFactory(Supplier<IDAO<T>> supplier){
         this.oDAO = supplier.get();

@@ -1,6 +1,6 @@
-package DAC.DTO;
+package AKDAC.AKDTO;
 
-public class CatalogoDTO {
+public class AKCatalogoDTO {
     private Integer IdCatalogoPadre;
     private Integer IdCatalogo;
     private String Nombre;
@@ -9,14 +9,14 @@ public class CatalogoDTO {
     private String FechaCrea;
     private String FechaModifica;
 
-    public CatalogoDTO() {}
+    public AKCatalogoDTO() {}
 
-    public CatalogoDTO(Integer idCatalogo, String nombre) {
+    public AKCatalogoDTO(Integer idCatalogo, String nombre) {
         IdCatalogo = idCatalogo;
         Nombre = nombre;
     }
 
-    public CatalogoDTO(Integer idCatalogoPadre, Integer idCatalogo, String nombre, String detalle, String estado,
+    public AKCatalogoDTO(Integer idCatalogoPadre, Integer idCatalogo, String nombre, String detalle, String estado,
             String fechaCrea, String fechaModifica) {
         IdCatalogoPadre = idCatalogoPadre;
         IdCatalogo = idCatalogo;
