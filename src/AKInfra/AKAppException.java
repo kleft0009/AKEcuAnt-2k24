@@ -1,12 +1,11 @@
 package AKInfra;
 
 import java.io.FileWriter;
-import java.io.ObjectInputFilter.Config;
 import java.io.PrintWriter;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class AKAppException extends Exception {
+    public class AKAppException extends Exception {
 
     public AKAppException(String message) {
         super(message);

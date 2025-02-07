@@ -1,5 +1,7 @@
 package AKBLC;
 
+import AKDAC.AKDAO.AKCatalogoDAO;
+import AKDAC.AKDTO.AKCatalogoDTO;
 import java.util.HashMap;
 import java.util.Map;
 

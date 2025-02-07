@@ -5,7 +5,7 @@ import AKBLC.AKEntities.AKCarnivoro;
 import AKBLC.AKEntities.AKGenoAlimento;        
 import AKBLC.AKEntities.AKHLarva; 
 import AKBLC.AKEntities.AKHormiga; 
-import AKBLC.AKEntities.AKIngestaNativa; 
+import AKBLC.AKEntities.IAKIngestaNativa; 
 import AKBLC.AKEntities.AKXY; 
 import AKDAC.AKHormigueroDAC; 
 import AKInfra.AKAppException;
@@ -42,7 +42,7 @@ public class AKHormiguero {
     public String alimentarHormiga(int IdHormiga, String alimentoGeno, String alimentoNativo) throws AKAppException {
         int indexlist = 0;
         AKGenoAlimento aGeno = null;
-        AKIngestaNativa aNativo = null;
+        IAKIngestaNativa aNativo = null;
         AKHormiga hormiga = null;
 
         // Creando GenoAlimento
@@ -55,10 +55,10 @@ public class AKHormiguero {
         // Creando IngestaNativa
         switch (alimentoNativo) {
             case "Carnívoro": aNativo = new AKCarnivoro(); break;
-            case "Herbívoro": aNativo = new AKIngestaNativa(); break;
-            case "Omnívoro": aNativo = new AKIngestaNativa(); break;
-            case "Insectívoro": aNativo = new AKIngestaNativa(); break;
-            case "Nectarívoros": aNativo = new AKIngestaNativa(); break;
+            case "Herbívoro": aNativo = new IAKIngestaNativa(); break;
+            case "Omnívoro": aNativo = new IAKIngestaNativa(); break;
+            case "Insectívoro": aNativo = new IAKIngestaNativa(); break;
+            case "Nectarívoros": aNativo = new IAKIngestaNativa(); break;
         }
         //buscar indexList y hormiga a alimentar 
         for (;indexList < lstHormiguero.size(); indexList++) 

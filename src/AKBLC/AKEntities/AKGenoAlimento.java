@@ -1,5 +1,14 @@
 package AKBLC.AKEntities;
 
-public class AKGenoAlimento {
+public abstract class AKGenoAlimento extends AKIngestaNativa{
     
+        private String característicasGenéticas;    
+    
+        public abstract void AKAplicarEvolucion(AKHormiga hormiga);
+    
+        public AKGenoAlimento(String tipo, String característicasGenéticas) {
+            super();
+            this.característicasGenéticas = característicasGenéticas;
+    }
+
 }
